@@ -120,14 +120,10 @@ ${metricsText}
 
 데이터가 없는 항목은 언급하지 말고, 전문적이고 명확한 언어로 작성하세요.`;
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/report", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_KEY, "anthropic-version": "2023-06-01" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }],
-    }),
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
   });
   const data = await res.json();
   return data.content?.[0]?.text ?? "리포트 생성 실패";
