@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // ================================================================
 // ★ Apps Script 배포 후 아래 URL을 교체하세요
 // ================================================================
+const ANTHROPIC_KEY = import.meta.env.VITE_ANTHROPIC_KEY;
 const SHEET_API_URL = "https://script.google.com/macros/s/AKfycbz14SmU5Crg0LGhdAMEN6UefQfAsk-IEba6MSHW82v3o3MWCUbcoyLs_CvhXFoQmbHzvQ/exec";
 // ================================================================
 
@@ -121,7 +122,7 @@ ${metricsText}
 
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_KEY, "anthropic-version": "2023-06-01" },
     body: JSON.stringify({
       model: "claude-sonnet-4-20250514",
       max_tokens: 1000,
